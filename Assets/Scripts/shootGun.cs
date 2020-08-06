@@ -34,11 +34,11 @@ public class shootGun : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
-            target target = hit.transform.GetComponent<target>();
-            if (target != null)
-            {
-                target.TakeDamage(damage);
-            }
+            //target target = hit.transform.GetComponent<target>();
+            //if (target != null)
+            //{
+            //    //target.TakeDamage(damage);
+            //}
 
             if (hit.rigidbody != null)
             {

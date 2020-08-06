@@ -71,8 +71,8 @@ public class copShoot : MonoBehaviour
 		Debug.Log("Shoot");
 		bulletImpact.Play();
 		GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-		bullet bullet = bulletGO.GetComponent<bullet>();
-		Debug.Log(bullet);
+		//bullet bullet = bulletGO.GetComponent<bullet>();
+		//Debug.Log(bullet);
 
 		//if (bullet != null)
 			//bullet.Seek(target);

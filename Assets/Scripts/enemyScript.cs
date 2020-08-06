@@ -9,12 +9,12 @@ public class enemyScript : MonoBehaviour
     private float dis;
     public float moveSpeed;
     public float enemyRadius;
-    public Gun gun;
+    //public Gun gun;
     public float shootingRange = 5;
      void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        gun = GetComponent<Gun>();
+        //gun = GetComponent<Gun>();
     }
 
 
@@ -28,11 +28,11 @@ public class enemyScript : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed);
             if(Vector3.Distance(player.transform.position,this.gameObject.transform.position) < shootingRange)
             {
-                gun.enabled = true;
+                //gun.enabled = true;
             }
             else
             {
-                gun.enabled = false;
+                //gun.enabled = false;
             }
 
         }
