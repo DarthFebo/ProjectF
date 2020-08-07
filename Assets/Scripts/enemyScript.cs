@@ -7,34 +7,41 @@ public class enemyScript : MonoBehaviour
 {
     private Transform player;
     private float dis;
+
     public float moveSpeed;
     public float enemyRadius;
-    //public Gun gun;
+    public Gun gun;
     public float shootingRange = 5;
-     void Start()
+
+    void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //gun = GetComponent<Gun>();
+        gun = GetComponent<Gun>();
     }
 
-
-     void Update()
+    void Update()
     {
         dis = Vector3.Distance(player.position, transform.position);
 
         if(dis <= enemyRadius)
         {
             transform.LookAt(player);
-            GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed);
-            if(Vector3.Distance(player.transform.position,this.gameObject.transform.position) < shootingRange)
-            {
-                //gun.enabled = true;
-            }
-            else
-            {
-                //gun.enabled = false;
-            }
+            //GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed, ForceMode.);
+            GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
+        }
 
+        if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < shootingRange)
+        {
+            //gun.enabled = true;
+            if (!gun.IsInvoking("Shoot"))
+            {
+                gun.InvokeRepeating("Shoot", 0f, gun._reloadTime);
+            }
+        }
+        else
+        {
+            //gun.enabled = false;
+            gun.CancelInvoke("Shoot");
         }
     }
 
