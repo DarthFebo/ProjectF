@@ -6,13 +6,30 @@ public class radioScript : MonoBehaviour
 {
 
     bool inTrigger = false;
-    bool isPlaying = false;
+    private bool _isPlaying = false;
+    bool isPlaying
+    {
+        get => _isPlaying;
+        set
+        {
+            _isPlaying = value;
+
+            foreach(var spider in spiders.Keys)
+            {
+                spider.Sleep(value);
+            }
+        }
+    }
     public AudioSource audio;
+
+    private int triggerIndex = 0;
+
+    private Dictionary<Spider, int> spiders = new Dictionary<Spider, int>();
 
     void Update()
     {
         // check if in the trigger zone
-        if (inTrigger)
+        if (triggerIndex >= 2)
         {
             // check if key has been pressed
             if (Input.GetKeyDown(KeyCode.E))
@@ -36,12 +53,43 @@ public class radioScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        inTrigger = true;
+        if(other.CompareTag("Player"))
+        {
+            triggerIndex++;
+        }
+
+        var spider = other.GetComponent<Spider>();
+        if (spider)
+        {
+            if(spiders.ContainsKey(spider))
+            {
+                spiders[spider]++;
+            }
+            else
+            {
+                spiders.Add(spider, 1);
+                spider.Sleep(isPlaying);
+            }
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        inTrigger = false;
+        if (other.CompareTag("Player"))
+        {
+            triggerIndex--;
+        }
 
+        var spider = other.GetComponent<Spider>();
+        if (spider)
+        {
+            spiders[spider]--;
+
+            if(spiders[spider] <= 0)
+            {
+                spider.Sleep(false);
+                spiders.Remove(spider);
+            }
+        }
     }
 }

@@ -1,22 +1,35 @@
 ﻿
 using UnityEngine;
 
-public class pickUp : MonoBehaviour{
-   
-    
+public class pickUp : MonoBehaviour
+{
     public Transform theDest;
+    public float speed;
+
+    private new Rigidbody rigidbody;
+
+    private void Start()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
     void OnMouseDown()
     {
-        GetComponent<Rigidbody>().useGravity = false;
+        rigidbody.isKinematic = true;
+        rigidbody.detectCollisions = false;
+
         //  GetComponent<Rigidbody>().freezeRotation = true;
         this.transform.position = theDest.position;
-        this.transform.parent = GameObject.Find("destination").transform;
+        this.transform.parent = theDest;
     }
+    
     void OnMouseUp()
     {
         this.transform.parent = null;
-        GetComponent<Rigidbody>().useGravity = false;
+        rigidbody.isKinematic = false;
+        rigidbody.detectCollisions = true;
+
+        rigidbody.AddForce(theDest.forward * speed, ForceMode.Impulse);
     }
-    
 }
 
