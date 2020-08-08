@@ -14,10 +14,12 @@ public class radioScript : MonoBehaviour
         {
             _isPlaying = value;
 
+#if !UNITY_EDITOR
             foreach(var spider in spiders.Keys)
             {
                 spider.Sleep(value);
             }
+#endif
         }
     }
     
@@ -70,7 +72,11 @@ public class radioScript : MonoBehaviour
             else
             {
                 spiders.Add(spider, 1);
+#if UNITY_EDITOR
+                spider.Sleep(true);
+#else
                 spider.Sleep(isPlaying);
+#endif
             }
         }
     }

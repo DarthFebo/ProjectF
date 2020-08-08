@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spider : MonoBehaviour
 {
@@ -46,8 +47,6 @@ public class Spider : MonoBehaviour
 
             if (playerDistance <= attackRadius)
             {
-                // Do Attack Stuff
-
                 animator.SetBool("attacking", true);
             }
             else
@@ -60,6 +59,11 @@ public class Spider : MonoBehaviour
     public void Sleep(bool value)
     {
         animator.SetBool("sleeping", value);
+        if(value)
+        {
+            animator.SetBool("walking", false);
+            animator.SetBool("attacking", false);
+        }
     }
 
     public void Die()
@@ -68,5 +72,23 @@ public class Spider : MonoBehaviour
 
         GetComponent<Rigidbody>().detectCollisions = false;
         Destroy(this);
+    }
+
+    public void Attack()
+    {
+        var playerDistance = Vector3.Distance(player.position, transform.position);
+        if (playerDistance <= attackRadius)
+        {
+            Destroy(player.GetComponent<PlayerMovementController>());
+            Destroy(player.GetComponentInChildren<PlayerCameraController>());
+            StartCoroutine(Coroutine());
+
+            IEnumerator Coroutine()
+            {
+                yield return new WaitForSecondsRealtime(1f);
+
+                SceneManager.LoadScene("diedscene");
+            }
+        }
     }
 }

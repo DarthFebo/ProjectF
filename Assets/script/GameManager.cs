@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour{
         EndGame();
     }
 
+    private void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void EndGame()
     {
         Cursor.visible = true;

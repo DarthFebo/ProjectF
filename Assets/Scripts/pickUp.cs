@@ -16,19 +16,37 @@ public class pickUp : MonoBehaviour
     void OnMouseDown()
     {
         rigidbody.isKinematic = true;
-        rigidbody.detectCollisions = false;
-
-        //  GetComponent<Rigidbody>().freezeRotation = true;
         this.transform.position = theDest.position;
         this.transform.parent = theDest;
+
+        foreach(var collider in GetComponents<Collider>())
+        {
+            if(!collider.isTrigger)
+            {
+                collider.enabled = false;
+            }
+        }
+
+        //rigidbody.position = destination.position;
+        //fixedJoint = gameObject.AddComponent<FixedJoint>();
+        //fixedJoint.enableCollision = false;
+        //fixedJoint.connectedBody = destination;
     }
     
     void OnMouseUp()
     {
         this.transform.parent = null;
         rigidbody.isKinematic = false;
-        rigidbody.detectCollisions = true;
 
+        foreach (var collider in GetComponents<Collider>())
+        {
+            if (!collider.isTrigger)
+            {
+                collider.enabled = true;
+            }
+        }
+
+        //Destroy(fixedJoint);
         rigidbody.AddForce(theDest.forward * speed, ForceMode.Impulse);
     }
 }
