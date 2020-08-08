@@ -61,4 +61,12 @@ public class Spider : MonoBehaviour
     {
         animator.SetBool("sleeping", value);
     }
+
+    public void Die()
+    {
+        animator.SetTrigger("die");
+
+        GetComponent<Rigidbody>().detectCollisions = false;
+        Destroy(this);
+    }
 }

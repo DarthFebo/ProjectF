@@ -20,7 +20,9 @@ public class radioScript : MonoBehaviour
             }
         }
     }
+    
     public AudioSource audio;
+    public float killForce = 2f;
 
     private int triggerIndex = 0;
 
@@ -90,6 +92,16 @@ public class radioScript : MonoBehaviour
                 spider.Sleep(false);
                 spiders.Remove(spider);
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var spider = collision.collider.GetComponent<Spider>();
+        if(spider && collision.impulse.magnitude >= killForce)
+        {
+            spider.Die();
+            spiders.Remove(spider);
         }
     }
 }
