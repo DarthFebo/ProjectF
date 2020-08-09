@@ -16,19 +16,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!135 &4210584401609416223
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1948345808821749392}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.8, z: 0.88}
 --- !u!135 &2056448473322696629
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -42,6 +29,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.91
   m_Center: {x: 0, y: 1.2, z: -0.44}
+--- !u!135 &4210584401609416223
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948345808821749392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.8, z: 0.88}
 --- !u!114 &2354510378946891473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,9 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea229bb9d72360d4d96882d6bccb7094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 4
   sightRadius: 7
-  attackRadius: 3.6
+  attackRadius: 4
 --- !u!1001 &1948345808821715348
 PrefabInstance:
   m_ObjectHideFlags: 0

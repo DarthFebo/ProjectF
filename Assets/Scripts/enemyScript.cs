@@ -26,7 +26,7 @@ public class enemyScript : MonoBehaviour
 
         if(playerDistance <= enemyRadius)
         {
-            transform.LookAt(player);
+            transform.LookAt(player, Vector3.up);
             //GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed, ForceMode.);
             GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
 

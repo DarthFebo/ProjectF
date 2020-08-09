@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-
-    public AudioSource bulletImpact;
+    //public AudioSource bulletImpact;
+    public AudioClip bulletImpact;
 
     private void OnCollisionEnter(Collision coll)
     {
         playerHealth health = coll.gameObject.GetComponent<playerHealth>();
         if(health)
         {
-            bulletImpact.Play();
+            AudioSource.PlayClipAtPoint(bulletImpact, coll.transform.position);
             health.HurtPlayer(1);
         }
 

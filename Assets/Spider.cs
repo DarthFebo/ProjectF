@@ -40,7 +40,7 @@ public class Spider : MonoBehaviour
             {
                 var targetDistance = Vector3.Distance(target.position, transform.position);
 
-                transform.LookAt(target);
+                transform.LookAt(target, Vector3.up);
                 GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
                 animator.SetBool("walking", true);
 

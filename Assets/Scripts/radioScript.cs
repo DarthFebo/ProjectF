@@ -14,12 +14,11 @@ public class radioScript : MonoBehaviour
         {
             _isPlaying = value;
 
-#if !UNITY_EDITOR
+            // Comment dit uit als je gek word van het geluid Plus regel 76.
             foreach(var spider in spiders.Keys)
             {
                 spider.Sleep(value);
             }
-#endif
         }
     }
     
@@ -72,11 +71,9 @@ public class radioScript : MonoBehaviour
             else
             {
                 spiders.Add(spider, 1);
-#if UNITY_EDITOR
-                spider.Sleep(true);
-#else
+
+                //spider.Sleep(true); // Haal deze comment weg als regel 76 een comment heeft.
                 spider.Sleep(isPlaying);
-#endif
             }
         }
     }
@@ -113,7 +110,7 @@ public class radioScript : MonoBehaviour
         var enemy = collision.collider.GetComponent<enemyScript>();
         if(enemy && collision.impulse.magnitude >= killForce)
         {
-            Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
     }
 }

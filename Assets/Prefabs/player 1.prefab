@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 2972695871502413795}
   - component: {fileID: 2972695871502413805}
   - component: {fileID: 2972695871502413804}
+  - component: {fileID: 1795881525733862591}
   m_Layer: 0
   m_Name: player 1
   m_TagString: Player
@@ -140,6 +141,23 @@ MonoBehaviour:
   jumpForce: 4
   raycastDistance: 4
   forward: {fileID: 2972695872216113049}
+--- !u!114 &1795881525733862591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2972695871502413807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d86187314e644439332a28283ea939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 1
+  currentHealth: 1
+  healthTransform: {fileID: 0}
+  healthBar: {fileID: 0}
+  Health: {fileID: 0}
 --- !u!1 &2972695871977272664
 GameObject:
   m_ObjectHideFlags: 0
