@@ -7,6 +7,7 @@ public class Spider : MonoBehaviour
 {
     private Transform player;
     private Animator animator;
+    private enemyScript[] enemies;
 
     public float moveSpeed;
     public float sightRadius;
@@ -25,32 +26,36 @@ public class Spider : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
+
+        enemies = GameObject.FindObjectsOfType<enemyScript>();
     }
 
     private void Update()
     {
         if(!animator.GetBool("sleeping"))
         {
-            var playerDistance = Vector3.Distance(player.position, transform.position);
+            var target = GetTarget();
 
-            if (playerDistance <= sightRadius)
+            if (target)
             {
-                transform.LookAt(player);
-                GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
+                var targetDistance = Vector3.Distance(target.position, transform.position);
 
+                transform.LookAt(target);
+                GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
                 animator.SetBool("walking", true);
+
+                if (targetDistance <= attackRadius)
+                {
+                    animator.SetBool("attacking", true);
+                }
+                else
+                {
+                    animator.SetBool("attacking", false);
+                }
             }
             else
             {
                 animator.SetBool("walking", false);
-            }
-
-            if (playerDistance <= attackRadius)
-            {
-                animator.SetBool("attacking", true);
-            }
-            else
-            {
                 animator.SetBool("attacking", false);
             }
         }
@@ -76,19 +81,61 @@ public class Spider : MonoBehaviour
 
     public void Attack()
     {
-        var playerDistance = Vector3.Distance(player.position, transform.position);
-        if (playerDistance <= attackRadius)
+        var target = GetTarget();
+
+        if (target)
         {
-            Destroy(player.GetComponent<PlayerMovementController>());
-            Destroy(player.GetComponentInChildren<PlayerCameraController>());
-            StartCoroutine(Coroutine());
-
-            IEnumerator Coroutine()
+            var targetDistance = Vector3.Distance(target.position, transform.position);
+            if(targetDistance <= attackRadius)
             {
-                yield return new WaitForSecondsRealtime(1f);
+                if (target == player)
+                {
+                    Destroy(target.GetComponent<PlayerMovementController>());
+                    Destroy(target.GetComponentInChildren<PlayerCameraController>());
+                    StartCoroutine(Coroutine());
 
-                SceneManager.LoadScene("diedscene");
+                    IEnumerator Coroutine()
+                    {
+                        yield return new WaitForSecondsRealtime(1f);
+
+                        GameManager gameManager = FindObjectOfType<GameManager>();
+                        gameManager.EndGame();
+                    }
+                }
+                else
+                {
+                    Destroy(target.gameObject);
+                }
             }
         }
+    }
+
+    private Transform GetTarget()
+    {
+        Transform target = null;
+        var targetDistance = sightRadius;
+        foreach (var enemy in enemies)
+        {
+            if (enemy)
+            {
+                var enemyDistance = Vector3.Distance(enemy.transform.position, transform.position);
+                if (enemyDistance <= targetDistance)
+                {
+                    targetDistance = enemyDistance;
+                    target = enemy.transform;
+                }
+            }
+        }
+
+        if (!target)
+        {
+            var playerDistance = Vector3.Distance(player.position, transform.position);
+            if (playerDistance <= targetDistance)
+            {
+                target = player;
+            }
+        }
+
+        return target;
     }
 }

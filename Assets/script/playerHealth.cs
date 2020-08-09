@@ -27,7 +27,7 @@ public class playerHealth : MonoBehaviour
 
         if (healthBar && currentHealth > -1)
         {
-            Health.fillAmount -= .33f;  
+           Health.fillAmount -= .33f;
            //healthBar.SetHealth(currentHealth, startHealth);
         }
 
@@ -51,13 +51,8 @@ public class playerHealth : MonoBehaviour
         }
     }
 
-
-    public void HealtPlayer(int healAmount)
+    public void HealPlayer(int healAmount)
     {
-        currentHealth += healAmount;
-        if (currentHealth > startHealth)
-        {
-            currentHealth = startHealth;
-        }
+        currentHealth = Mathf.Min(currentHealth + healAmount, startHealth);
     }
 }

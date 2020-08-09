@@ -109,5 +109,11 @@ public class radioScript : MonoBehaviour
             spider.Die();
             spiders.Remove(spider);
         }
+
+        var enemy = collision.collider.GetComponent<enemyScript>();
+        if(enemy && collision.impulse.magnitude >= killForce)
+        {
+            Destroy(enemy);
+        }
     }
 }

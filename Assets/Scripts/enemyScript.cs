@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class enemyScript : MonoBehaviour
 {
     private Transform player;
-    private float dis;
+    private Transform radio;
 
     public float moveSpeed;
     public float enemyRadius;
@@ -16,40 +15,50 @@ public class enemyScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        radio = GameObject.FindGameObjectWithTag("Radio").transform;
         gun = GetComponent<Gun>();
     }
 
     void Update()
     {
-        dis = Vector3.Distance(player.position, transform.position);
+        var playerDistance = Vector3.Distance(player.position, transform.position);
+        var radioDistance = Vector3.Distance(radio.position, transform.position);
 
-        if(dis <= enemyRadius)
+        if(playerDistance <= enemyRadius)
         {
             transform.LookAt(player);
             //GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed, ForceMode.);
             GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
-        }
 
-        if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < shootingRange)
-        {
-            //gun.enabled = true;
-            if (!gun.IsInvoking("Shoot"))
+            if (playerDistance <= shootingRange)
             {
-                gun.InvokeRepeating("Shoot", 0f, gun._reloadTime);
+                //gun.enabled = true;
+                if (!gun.IsInvoking("Shoot"))
+                {
+                    gun.InvokeRepeating("Shoot", 0f, gun._reloadTime);
+                }
+            }
+            else
+            {
+                //gun.enabled = false;
+                gun.CancelInvoke("Shoot");
             }
         }
-        else
+        else if(radioDistance <= enemyRadius)
         {
-            //gun.enabled = false;
-            gun.CancelInvoke("Shoot");
+            transform.LookAt(radio);
+            GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
         }
     }
 
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, enemyRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
 }
 
