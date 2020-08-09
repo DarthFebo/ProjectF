@@ -26,7 +26,12 @@ PrefabInstance:
     - target: {fileID: 978629610763855419, guid: 73b4014b306199f4896c5c4d9fab8110,
         type: 3}
       propertyPath: m_Name
-      value: Cop
+      value: Cop Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 978629610763855419, guid: 73b4014b306199f4896c5c4d9fab8110,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 985112809892211631, guid: 73b4014b306199f4896c5c4d9fab8110,
         type: 3}

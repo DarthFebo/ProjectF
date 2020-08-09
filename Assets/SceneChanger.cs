@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class SceneChanger : MonoBehaviour
 {
     [SerializeField] private string nextLevel;
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene(nextLevel);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
