@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea229bb9d72360d4d96882d6bccb7094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 8
   sightRadius: 7
   attackRadius: 3.6
 --- !u!1001 &3910758353498465031

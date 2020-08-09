@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ecb0256b8f81a41a1a8f3772da279a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 6
   enemyRadius: 7
   gun: {fileID: 3885828852942538704}
   shootingRange: 4

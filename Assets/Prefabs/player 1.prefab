@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18637e37c526ac545a4a0c487ab89346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 4
+  speed: 7
+  jumpForce: 0
   raycastDistance: 4
   forward: {fileID: 2972695872216113049}
 --- !u!114 &1795881525733862591

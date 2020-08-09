@@ -54,8 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea229bb9d72360d4d96882d6bccb7094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  sightRadius: 7
+  moveSpeed: 10
+  sightRadius: 7.3
   attackRadius: 4
 --- !u!1001 &1948345808821715348
 PrefabInstance:
